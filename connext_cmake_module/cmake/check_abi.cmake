@@ -21,3 +21,4 @@ include_directories(@Connext_INCLUDE_DIRS@)
 add_executable(exe
   "@connext_cmake_module_DIR@/check_abi.cpp")
 target_link_libraries(exe @Connext_LIBRARIES@)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} @Connext_LINK_FLAGS@")
