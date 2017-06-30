@@ -315,6 +315,8 @@ rmw_create_publisher(
     return NULL;
   }
   std::string type_name = _create_type_name(callbacks, "msg");
+  std::string  topic_name_with_type = std::string(topic_name) + "_" + type_name;
+  const char * topic_name2 = topic_name_with_type.c_str();
   // Past this point, a failure results in unrolling code in the goto fail block.
   bool registered;
   DDS_DataWriterQos datawriter_qos;
@@ -353,7 +355,7 @@ rmw_create_publisher(
   }
 
   if (!_process_topic_name(
-      topic_name,
+      topic_name2,
       qos_profile->avoid_ros_namespace_conventions,
       &topic_str,
       &partition_str))
@@ -654,6 +656,8 @@ rmw_create_subscription(const rmw_node_t * node,
     return NULL;
   }
   std::string type_name = _create_type_name(callbacks, "msg");
+  std::string  topic_name_with_type = std::string(topic_name) + "_" + type_name;
+  const char * topic_name2 = topic_name_with_type.c_str();
   // Past this point, a failure results in unrolling code in the goto fail block.
   bool registered;
   DDS_DataReaderQos datareader_qos;
@@ -693,7 +697,7 @@ rmw_create_subscription(const rmw_node_t * node,
   }
 
   if (!_process_topic_name(
-      topic_name,
+      topic_name2,
       qos_profile->avoid_ros_namespace_conventions,
       &topic_str,
       &partition_str))
